@@ -17,3 +17,24 @@ export class CreatePostDTO {
     status!: PostStatus;
 
 }
+@InputType()
+export class PostFilterFieldsDTO {
+    @Field(() => String, { nullable: true })
+    title?: string;
+
+    @Field(() => String, { nullable: true })
+    content?: string;
+
+    @Field(() => String, { nullable: true })
+    author?: number;
+
+    @Field(() => String, { nullable: true })
+    status?: PostStatus;
+
+}
+@InputType()
+export class FilterGroupByPostDTO {
+    @Field(() => String, { nullable: true })
+    field?: string;
+
+}

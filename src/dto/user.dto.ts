@@ -13,3 +13,22 @@ export class CreateUserDTO {
     role!: UserRole;
 
 }
+
+@InputType()
+export class UserFilterFieldsDTO {
+    @Field(() => String, { nullable: true })
+    email?: string;
+
+    @Field(() => String, { nullable: true })
+    name?: string;
+
+    @Field(() => String, { nullable: true })
+    role?: UserRole;
+
+}
+@InputType()
+export class FilterGroupByUserDTO {
+    @Field(() => String, { nullable: true })
+    field?: string;
+
+}

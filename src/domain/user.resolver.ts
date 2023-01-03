@@ -4,29 +4,24 @@ import {
     Query,
     Resolver,
 } from "type-graphql";
-import { prisma } from '../infrastructure/prisma'
-import { PrismaClient } from "@prisma/client";
 import { CreateUserDTO } from "../dto/user.dto";
 import { User } from "./user.entitiy";
+import { UserFiltersDTO } from "../dto/filters.dto";
+import { UserService } from "../services/user.service";
 
 
 @Resolver()
 export class UserResolver {
-    constructor(private prismaClient: PrismaClient) {
-        this.prismaClient = prisma;
+    constructor(private userService: UserService) {
+        this.userService = new UserService();
     }
     @Query(() => [User])
-    getAll(): Promise<User[]> {
-        return this.prismaClient.user.findMany();
+    async getAllUsers(@Arg("filters") filters: UserFiltersDTO): Promise<Array<any>> {
+        return this.userService.getAll(filters);
     }
 
     @Mutation(() => User!)
     async createUser(@Arg("input") input: CreateUserDTO): Promise<User> {
-        return this.prismaClient
-            .user.create({
-                data: {
-                    ...input
-                }
-            })
+        return this.userService.save(input);
     }
 }
