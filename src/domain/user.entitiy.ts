@@ -20,7 +20,7 @@ export class User {
     })
     name!: string;
 
-    @TypeGraphQL.Field(_type => UserRole, {
+    @TypeGraphQL.Field(_type => String, {
         nullable: false
     })
     role!: UserRole;

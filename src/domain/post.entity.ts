@@ -1,3 +1,4 @@
+import { PostStatus } from "@prisma/client";
 import * as TypeGraphQL from "type-graphql";
 
 @TypeGraphQL.ObjectType("Post", {
@@ -25,18 +26,10 @@ export class Post {
     })
     author?: number | null;
 
-    // @TypeGraphQL.Field(_type => PostStatusForEntity, {
-    //     nullable: false
-    // })
-    // status!: PostStatusForEntity;
-
-    @TypeGraphQL.Field(_type => Date, {
-        nullable: true
+    @TypeGraphQL.Field(_type => String, {
+        nullable: false
     })
-    createdAt?: Date;
+    status!: PostStatus;
 
-    @TypeGraphQL.Field(_type => Date, {
-        nullable: true
-    })
-    updatedAt?: Date;
+
 }

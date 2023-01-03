@@ -14,6 +14,7 @@ export class PostResolver {
     constructor(private prismaClient: PrismaClient) {
         this.prismaClient = prisma;
     }
+
     @Query(() => [Post])
     async getAll(): Promise<Post[]> {
         const posts = await this.prismaClient.post.findMany();
@@ -26,9 +27,6 @@ export class PostResolver {
             .post.create({
                 data: {
                     ...input,
-                    status: "Archived",
-                    createdAt: new Date(),
-                    updatedAt: new Date()
                 }
             })
     }

@@ -1,5 +1,5 @@
+import { PostStatus } from "@prisma/client";
 import { Field, InputType } from "type-graphql";
-// import { PostStatusForEntity } from "../domain/enums/StatusEnum";
 
 
 @InputType()
@@ -13,12 +13,7 @@ export class CreatePostDTO {
     @Field(() => Number!)
     author!: number;
 
-    // @Field(() => PostStatusForEntity!)
-    // status!: PostStatusForEntity;
+    @Field(() => String!)
+    status!: PostStatus;
 
-    // @Field(() => Date!)
-    // createdAt?: Date;
-
-    // @Field(() => Date!)
-    // updatedAt?: Date;
 }

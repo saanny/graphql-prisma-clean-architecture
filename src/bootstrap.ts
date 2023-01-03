@@ -5,8 +5,8 @@ import { Server } from "./infrastructure/http/server";
 export async function bootstrap() {
     const server = new Server();
     const apolloServer = new Apollo(server.app);
-    apolloServer.run();
-    server.run(8000);
+    await apolloServer.run();
+    await server.run(8000);
 
 }
 

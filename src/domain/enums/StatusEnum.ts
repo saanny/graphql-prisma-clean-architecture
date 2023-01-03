@@ -1,9 +1,3 @@
-export enum PostStatusForEntity {
-    Draft = 'Draft',
-    Published = 'Published',
-    Archived = 'Archived'
-}
-
 export const PostStatus: {
     Draft: 'Draft'
     Published: 'Published'

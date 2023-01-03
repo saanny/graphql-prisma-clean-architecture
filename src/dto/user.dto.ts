@@ -9,7 +9,7 @@ export class CreateUserDTO {
     @Field(() => String!)
     name!: string;
 
-    @Field(() => UserRole!)
+    @Field(() => String!)
     role!: UserRole;
 
 }
