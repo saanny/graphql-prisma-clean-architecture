@@ -1,10 +1,11 @@
 import { PrismaClient } from "@prisma/client";
+import { IUserService } from "../domain/IUserService";
 import { User } from "../domain/user.entitiy";
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
 import { prisma } from "../infrastructure/prisma";
 
-export class UserService {
+export class UserService implements IUserService {
     private prismaClient: PrismaClient
 
     constructor() {

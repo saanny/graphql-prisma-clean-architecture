@@ -17,6 +17,7 @@ export class PostResolver {
 
     @Query(() => [Post])
     async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Post[]> {
+        console.log(filters)
         const posts = await this.postService.getAll(filters);
         return posts;
     }

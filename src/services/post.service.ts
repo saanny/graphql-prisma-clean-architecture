@@ -1,10 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import { IPostService } from "../domain/IPostService";
 import { Post } from "../domain/post.entity";
+
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
 import { prisma } from "../infrastructure/prisma";
 
-export class PostService {
+export class PostService implements IPostService {
     private prismaClient: PrismaClient
 
     constructor() {
@@ -15,11 +17,15 @@ export class PostService {
         return this.prismaClient
             .post.create({
                 data: {
-                    ...post
+                    ...post,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
                 }
-            })
+            });
     }
+
     async getAll(filters: PostFiltersDTO): Promise<Array<any>> {
+        console.log(filters)
         let posts: Array<Post> = [];
 
         const filtersData: any = {}

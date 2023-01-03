@@ -15,21 +15,29 @@ export class Post {
     })
     title!: string;
 
-
     @TypeGraphQL.Field(_type => String, {
-        nullable: true
+        nullable: false
     })
-    content?: string | null;
+    content!: string;
 
     @TypeGraphQL.Field(_type => Number, {
-        nullable: true
+        nullable: false
     })
-    author?: number | null;
+    author!: number;
 
     @TypeGraphQL.Field(_type => String, {
         nullable: false
     })
     status!: PostStatus;
 
+    @TypeGraphQL.Field(_type => Date, {
+        nullable: false
+    })
+    createdAt!: Date;
+
+    @TypeGraphQL.Field(_type => Date, {
+        nullable: false
+    })
+    updatedAt!: Date;
 
 }

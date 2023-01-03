@@ -17,6 +17,7 @@ export class CreatePostDTO {
     status!: PostStatus;
 
 }
+
 @InputType()
 export class PostFilterFieldsDTO {
     @Field(() => String, { nullable: true })
@@ -25,7 +26,7 @@ export class PostFilterFieldsDTO {
     @Field(() => String, { nullable: true })
     content?: string;
 
-    @Field(() => String, { nullable: true })
+    @Field(() => Number, { nullable: true })
     author?: number;
 
     @Field(() => String, { nullable: true })
