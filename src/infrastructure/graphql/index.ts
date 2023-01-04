@@ -4,13 +4,13 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
 import cors from 'cors';
 import { Application } from 'express'
-
+import { Container } from "typedi";
 
 export class Apollo {
     private apolloServer?: ApolloServer;
     private expressApp: Application;
 
-    constructor(expressApp: Application, private schema: any = [], private contianer: any) {
+    constructor(expressApp: Application, private schema: any = []) {
         this.expressApp = expressApp;
     }
     public async run() {
@@ -19,9 +19,10 @@ export class Apollo {
             schema: await buildSchema({
                 resolvers: this.schema,
                 validate: false,
-                container: this.contianer
+                container: Container
             }),
         });
+
         await this.apolloServer.start()
             .then(() => {
                 console.log(`Graphql server running on route http://localhost:8000/graphql`)

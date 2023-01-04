@@ -1,10 +1,10 @@
-
-import { injectable } from "inversify";
+import { Service } from "typedi";
 import { Post } from "../domain/post.entity";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
 import { Prisma } from "../infrastructure/driver";
-@injectable()
+
+@Service()
 export class PostService {
     constructor(private prismaClient: Prisma) {
 

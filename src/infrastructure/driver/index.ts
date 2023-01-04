@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { injectable } from "inversify";
-@injectable()
+import { Service } from "typedi";
+
+@Service()
 export class Prisma {
     private prismaClient: PrismaClient;
     constructor() {
@@ -9,7 +11,5 @@ export class Prisma {
     public get prisma() {
         return this.prismaClient;
     }
-
-
 }
 

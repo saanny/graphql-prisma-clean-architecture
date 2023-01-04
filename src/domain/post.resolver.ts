@@ -7,12 +7,11 @@ import {
 import { Post } from "./post.entity";
 import { CreatePostDTO } from "../dto/post.dto";
 import { PostFiltersDTO } from "../dto/filters.dto";
-import { Inject } from "typescript-ioc";
+import { Service } from "typedi";
 import { PostService } from "../services/post.service";
-import { injectable } from "inversify";
 
+@Service()
 @Resolver()
-@injectable()
 export class PostResolver {
     private postService: PostService;
     constructor(postService: PostService) {

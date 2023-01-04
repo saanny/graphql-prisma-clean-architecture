@@ -3,7 +3,8 @@ import { User } from "../domain/user.entitiy";
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
 import { Prisma } from "../infrastructure/driver";
-@injectable()
+import { Service } from "typedi";
+@Service()
 export class UserService {
 
     public constructor(private readonly _prismaClient: Prisma) { }

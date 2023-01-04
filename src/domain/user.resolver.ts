@@ -8,18 +8,17 @@ import { CreateUserDTO } from "../dto/user.dto";
 import { User } from "./user.entitiy";
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { UserService } from "../services/user.service";
-import { injectable } from "inversify";
-
+import { Service } from "typedi";
+@Service()
 @Resolver()
-@injectable()
 export class UserResolver {
 
     public constructor(private readonly _userService: UserService) { }
 
     @Query(() => [User])
-    async getAllUsers(@Arg("filters") filters: UserFiltersDTO): Promise<Array<any>> {
-        console.log(this._userService)
-        return [];
+    async getAllUsers(@Arg("filters") filters: UserFiltersDTO): Promise<Array<User>> {
+
+        return this._userService.getAll(filters);
     }
 
     @Mutation(() => User!)
