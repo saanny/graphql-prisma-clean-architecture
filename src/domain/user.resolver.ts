@@ -5,7 +5,7 @@ import {
     Resolver,
 } from "type-graphql";
 import { CreateUserDTO } from "../dto/user.dto";
-import { User } from "./user.entitiy";
+import { User } from "./user.model";
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { UserService } from "../services/user.service";
 import { Service } from "typedi";

@@ -1,5 +1,5 @@
+import { Post } from "@prisma/client";
 import { Service } from "typedi";
-import { Post } from "../domain/post.entity";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
 import { Prisma } from "../infrastructure/driver";

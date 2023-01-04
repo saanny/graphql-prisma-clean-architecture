@@ -1,9 +1,9 @@
-import { injectable } from "inversify";
-import { User } from "../domain/user.entitiy";
+
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
 import { Prisma } from "../infrastructure/driver";
 import { Service } from "typedi";
+import { User } from "@prisma/client";
 @Service()
 export class UserService {
 

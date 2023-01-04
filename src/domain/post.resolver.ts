@@ -4,7 +4,7 @@ import {
     Query,
     Resolver,
 } from "type-graphql";
-import { Post } from "./post.entity";
+import { Post } from "./post.model";
 import { CreatePostDTO } from "../dto/post.dto";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { Service } from "typedi";
