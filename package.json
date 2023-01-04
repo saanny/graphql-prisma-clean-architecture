@@ -52,14 +52,18 @@
     "@apollo/server": "^4.3.0",
     "@prisma/client": "^4.8.0",
     "@types/cors": "^2.8.13",
+    "@types/inversify": "^2.0.33",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "graphql": "15",
     "graphql-scalars": "^1.20.1",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
     "jest-cucumber": "^3.0.1",
     "prisma": "^4.8.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "typegraphql-prisma": "^0.23.2"
+    "typegraphql-prisma": "^0.23.2",
+    "typescript-ioc": "^3.2.2"
   }
 }

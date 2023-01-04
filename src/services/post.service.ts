@@ -1,27 +1,22 @@
-import { PrismaClient } from "@prisma/client";
-import { IPostService } from "../domain/IPostService";
-import { Post } from "../domain/post.entity";
 
+import { injectable } from "inversify";
+import { Post } from "../domain/post.entity";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
-import { prisma } from "../infrastructure/prisma";
+import { Prisma } from "../infrastructure/driver";
+@injectable()
+export class PostService {
+    constructor(private prismaClient: Prisma) {
 
-export class PostService implements IPostService {
-    private prismaClient: PrismaClient
-
-    constructor() {
-        this.prismaClient = prisma;
     }
 
     async save(post: CreatePostDTO): Promise<Post> {
-        return this.prismaClient
-            .post.create({
-                data: {
-                    ...post,
-                    createdAt: new Date(),
-                    updatedAt: new Date()
-                }
-            });
+
+        return this.prismaClient.prisma.post.create({
+            data: {
+                ...post
+            }
+        })
     }
 
     async getAll(filters: PostFiltersDTO): Promise<Array<any>> {
@@ -48,13 +43,13 @@ export class PostService implements IPostService {
                 },
             }
 
-            posts = await this.prismaClient.post.groupBy({
+            posts = await this.prismaClient.prisma.post.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
             });
 
         } else {
-            posts = await this.prismaClient.post.findMany({
+            posts = await this.prismaClient.prisma.post.findMany({
                 where: { ...filtersData.where }
             });
         }

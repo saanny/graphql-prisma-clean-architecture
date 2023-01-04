@@ -7,17 +7,21 @@ import {
 import { Post } from "./post.entity";
 import { CreatePostDTO } from "../dto/post.dto";
 import { PostFiltersDTO } from "../dto/filters.dto";
+import { Inject } from "typescript-ioc";
 import { PostService } from "../services/post.service";
+import { injectable } from "inversify";
 
 @Resolver()
+@injectable()
 export class PostResolver {
-    constructor(private postService: PostService) {
-        this.postService = new PostService();
+    private postService: PostService;
+    constructor(postService: PostService) {
+        this.postService = postService;
     }
 
     @Query(() => [Post])
     async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Post[]> {
-        console.log(filters)
+
         const posts = await this.postService.getAll(filters);
         return posts;
     }

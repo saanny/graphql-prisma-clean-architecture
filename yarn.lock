@@ -1374,6 +1374,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/inversify@^2.0.33":
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@types/inversify/-/inversify-2.0.33.tgz#0770dae2299aaee57803f75235e64a99b74f6de0"
+  integrity sha512-WAue6NmBkfjjdGKaGSSTZY9HeSao2xL5rEd3UgGtb5lWaAqe/GmrpCxsAoGvepx2Cg932QfqukJfrmH1uN4Ptw==
+  dependencies:
+    inversify "*"
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
@@ -3482,6 +3489,11 @@ http-proxy-agent@^4.0.1:
     agent-base "6"
     debug "4"
 
+http-status-codes@^2.1.4:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/http-status-codes/-/http-status-codes-2.2.0.tgz#bb2efe63d941dfc2be18e15f703da525169622be"
+  integrity sha512-feERVo9iWxvnejp3SEfm/+oNG517npqL2/PIA8ORjyOZjGC7TwCRQsZylciLS64i6pJ0wRYz3rkXLRwbtFa8Ng==
+
 https-proxy-agent@5.0.1, https-proxy-agent@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz#c59ef224a04fe8b754f3db0063a25ea30d0005d6"
@@ -3570,6 +3582,20 @@ ini@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ini/-/ini-2.0.0.tgz#e5fd556ecdd5726be978fa1001862eacb0a94bc5"
   integrity sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==
+
+inversify-express-utils@^6.4.3:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/inversify-express-utils/-/inversify-express-utils-6.4.3.tgz#3b46ec617e4608c5d8e0c7ef19c93b29f1b5e47b"
+  integrity sha512-7YvEXeZ912N9hAQ9x0+q9zGV670I1imaIQJzzaBXdPQQiodPEGCO6sq53ODczgyP6M6x4kkQNsu9MlzQbVCtAQ==
+  dependencies:
+    express "^4.17.1"
+    http-status-codes "^2.1.4"
+    inversify "^6.0.1"
+
+inversify@*, inversify@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/inversify/-/inversify-6.0.1.tgz#b20d35425d5d8c5cd156120237aad0008d969f02"
+  integrity sha512-B3ex30927698TJENHR++8FfEaJGqoWOgI6ZY5Ht/nLUsFCwHn6akbwtnUAPCgUepAnTpe2qHxhDNjoKLyz6rgQ==
 
 ipaddr.js@1.9.1:
   version "1.9.1"
@@ -4784,6 +4810,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -6513,6 +6544,15 @@ typegraphql-prisma@^0.23.2:
     semver "^7.3.8"
     ts-morph "^17.0.1"
     tslib "^2.4.1"
+
+typescript-ioc@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/typescript-ioc/-/typescript-ioc-3.2.2.tgz#5250a3691ea1d9425cbac22a44e8d6efb9584204"
+  integrity sha512-NI09BFj213x8vqOboOgrQt94MdNfKuXi68pnp4obT9a3uRk5cVjTPagLwkvZJXpSN4iV3sbSGhlQgY2uHEBhoA==
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.set "^4.3.2"
+    reflect-metadata "^0.1.13"
 
 typescript@^4.7.4:
   version "4.9.4"

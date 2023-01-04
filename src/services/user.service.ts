@@ -1,26 +1,25 @@
-import { PrismaClient } from "@prisma/client";
-import { IUserService } from "../domain/IUserService";
+import { injectable } from "inversify";
 import { User } from "../domain/user.entitiy";
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
-import { prisma } from "../infrastructure/prisma";
+import { Prisma } from "../infrastructure/driver";
+@injectable()
+export class UserService {
 
-export class UserService implements IUserService {
-    private prismaClient: PrismaClient
-
-    constructor() {
-        this.prismaClient = prisma;
-    }
+    public constructor(private readonly _prismaClient: Prisma) { }
 
     async save(user: CreateUserDTO): Promise<User> {
-        return this.prismaClient
-            .user.create({
+
+        return this._prismaClient
+            .prisma.user.create({
                 data: {
                     ...user
                 }
             })
     }
+
     async getAll(filters: UserFiltersDTO): Promise<Array<any>> {
+
         let users: Array<User> = [];
 
         const filtersData: any = {}
@@ -43,13 +42,13 @@ export class UserService implements IUserService {
                 },
             }
 
-            users = await this.prismaClient.user.groupBy({
+            users = await this._prismaClient.prisma.user.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
             });
 
         } else {
-            users = await this.prismaClient.user.findMany({
+            users = await this._prismaClient.prisma.user.findMany({
                 where: { ...filtersData.where }
             });
         }
