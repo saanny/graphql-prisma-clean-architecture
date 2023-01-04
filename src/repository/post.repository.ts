@@ -2,17 +2,18 @@ import { Post } from "@prisma/client";
 import { Service } from "typedi";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
-import { Prisma } from "../infrastructure/driver";
+import { Prisma } from "./driver";
+
 
 @Service()
-export class PostService {
-    constructor(private prismaClient: Prisma) {
+export class PostRepository {
+    constructor(private dataSource: Prisma) {
 
     }
 
     async save(post: CreatePostDTO): Promise<Post> {
 
-        return this.prismaClient.prisma.post.create({
+        return this.dataSource.prisma.post.create({
             data: {
                 ...post
             }
@@ -43,13 +44,13 @@ export class PostService {
                 },
             }
 
-            posts = await this.prismaClient.prisma.post.groupBy({
+            posts = await this.dataSource.prisma.post.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
             });
 
         } else {
-            posts = await this.prismaClient.prisma.post.findMany({
+            posts = await this.dataSource.prisma.post.findMany({
                 where: { ...filtersData.where }
             });
         }

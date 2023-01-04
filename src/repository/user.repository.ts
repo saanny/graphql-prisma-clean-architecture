@@ -1,17 +1,17 @@
 
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
-import { Prisma } from "../infrastructure/driver";
+import { Prisma } from "./driver";
 import { Service } from "typedi";
 import { User } from "@prisma/client";
 @Service()
-export class UserService {
+export class UserRepository {
 
-    public constructor(private readonly _prismaClient: Prisma) { }
+    public constructor(private readonly dataSource: Prisma) { }
 
     async save(user: CreateUserDTO): Promise<User> {
 
-        return this._prismaClient
+        return this.dataSource
             .prisma.user.create({
                 data: {
                     ...user
@@ -43,13 +43,13 @@ export class UserService {
                 },
             }
 
-            users = await this._prismaClient.prisma.user.groupBy({
+            users = await this.dataSource.prisma.user.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
             });
 
         } else {
-            users = await this._prismaClient.prisma.user.findMany({
+            users = await this.dataSource.prisma.user.findMany({
                 where: { ...filtersData.where }
             });
         }
