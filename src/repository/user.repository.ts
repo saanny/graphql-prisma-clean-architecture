@@ -1,7 +1,7 @@
 
 import { UserFiltersDTO } from "../dto/filters.dto";
 import { CreateUserDTO } from "../dto/user.dto";
-import { Prisma } from "./driver";
+import { Prisma } from "../dataSource/prisma.datasource";
 import { Service } from "typedi";
 import { User } from "@prisma/client";
 @Service()

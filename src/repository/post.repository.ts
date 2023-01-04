@@ -2,7 +2,7 @@ import { Post } from "@prisma/client";
 import { Service } from "typedi";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
-import { Prisma } from "./driver";
+import { Prisma } from "../dataSource/prisma.datasource";
 
 
 @Service()
