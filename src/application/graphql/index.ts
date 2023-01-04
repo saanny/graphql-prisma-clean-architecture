@@ -9,14 +9,11 @@ export class Apollo {
     private _apolloServer!: ApolloServer;
 
 
-    constructor(private resolvers: any = []) {
-
-    }
-    public async create() {
+    public async factory(resolvers: any = []) {
 
         this._apolloServer = new ApolloServer({
             schema: await buildSchema({
-                resolvers: this.resolvers,
+                resolvers: resolvers,
                 validate: false,
                 container: Container
             }),
