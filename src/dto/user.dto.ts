@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import { UserRole } from "../domain/enums/UserEnums";
+import { UserRole } from "../common/enums/UserEnums";
 
 @InputType()
 export class CreateUserDTO {

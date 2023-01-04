@@ -1,4 +1,4 @@
-import { UserRole } from "./enums/UserEnums";
+import { UserRole } from "../common/enums/UserEnums";
 import * as TypeGraphQL from "type-graphql";
 
 @TypeGraphQL.ObjectType("User", {
