@@ -2,20 +2,19 @@ import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
 import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
-import cors from 'cors';
-import { Application } from 'express'
+
 import { Container } from "typedi";
 
 export class Apollo {
-    private apolloServer?: ApolloServer;
-    private expressApp: Application;
+    private _apolloServer!: ApolloServer;
 
-    constructor(expressApp: Application, private resolvers: any = []) {
-        this.expressApp = expressApp;
+
+    constructor(private resolvers: any = []) {
+
     }
-    public async run() {
+    public async create() {
 
-        this.apolloServer = new ApolloServer({
+        this._apolloServer = new ApolloServer({
             schema: await buildSchema({
                 resolvers: this.resolvers,
                 validate: false,
@@ -23,7 +22,7 @@ export class Apollo {
             }),
         });
 
-        await this.apolloServer.start()
+        await this._apolloServer.start()
             .then(() => {
                 console.log(`Graphql server running on route http://localhost:8000/graphql`)
             })
@@ -31,7 +30,9 @@ export class Apollo {
                 console.log(error)
             });
 
-        this.expressApp.use('/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(this.apolloServer));
+    }
+    public get apolloServer() {
+        return this._apolloServer;
     }
 
 

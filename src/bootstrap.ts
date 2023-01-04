@@ -6,9 +6,10 @@ import { Server } from "./application/http";
 
 
 export async function bootstrap() {
-    const server = new Server();
-    const apolloServer = new Apollo(server.app, [PostResolver, UserResolver]);
-    await apolloServer.run();
+
+    const apollo = new Apollo([PostResolver, UserResolver]);
+    await apollo.create();
+    const server = new Server(apollo.apolloServer);
     await server.run(8000);
 
 }
