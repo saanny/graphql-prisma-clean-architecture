@@ -10,14 +10,14 @@ export class Apollo {
     private apolloServer?: ApolloServer;
     private expressApp: Application;
 
-    constructor(expressApp: Application, private schema: any = []) {
+    constructor(expressApp: Application, private resolvers: any = []) {
         this.expressApp = expressApp;
     }
     public async run() {
 
         this.apolloServer = new ApolloServer({
             schema: await buildSchema({
-                resolvers: this.schema,
+                resolvers: this.resolvers,
                 validate: false,
                 container: Container
             }),
