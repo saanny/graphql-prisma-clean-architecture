@@ -7,9 +7,7 @@ import { Prisma } from "../dataSource/prisma.datasource";
 
 @Service()
 export class PostRepository {
-    constructor(private dataSource: Prisma) {
-
-    }
+    constructor(private dataSource: Prisma) { }
 
     async save(post: CreatePostDTO): Promise<Post> {
 
@@ -21,7 +19,7 @@ export class PostRepository {
     }
 
     async getAll(filters: PostFiltersDTO): Promise<Array<any>> {
-        console.log(filters)
+
         let posts: Array<Post> = [];
 
         const filtersData: any = {}

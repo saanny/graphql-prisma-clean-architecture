@@ -1,15 +1,12 @@
 import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
-import { expressMiddleware } from '@apollo/server/express4';
-import { json } from 'body-parser';
-
 import { Container } from "typedi";
 
 export class Apollo {
     private _apolloServer!: ApolloServer;
 
 
-    public async factory(resolvers: any = []) {
+    public async create(resolvers: any = []) {
 
         this._apolloServer = new ApolloServer({
             schema: await buildSchema({

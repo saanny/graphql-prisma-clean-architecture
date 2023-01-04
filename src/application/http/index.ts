@@ -1,8 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import { expressMiddleware } from '@apollo/server/express4';
-import { json } from 'body-parser';
 import { ApolloServer } from "@apollo/server";
+
 export class Server {
     private _app = express();
     private _apolloServer: ApolloServer;
