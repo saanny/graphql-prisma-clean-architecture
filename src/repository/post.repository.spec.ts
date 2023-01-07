@@ -9,8 +9,10 @@ describe('post repository', () => {
     beforeEach(() => {
         repository = new PostRepository(new Prisma());
     })
-
-    test('should create new post ', async () => {
+    test('can create an instance of post repository ', async () => {
+        expect(repository).toBeDefined();
+    });
+    test('should create new post with normal data', async () => {
         const postData = {
             author: 1,
             content: "test",
@@ -23,11 +25,9 @@ describe('post repository', () => {
         expect(post).toBeDefined();
     });
 
-    it('can create an instance of post repository ', async () => {
-        expect(repository).toBeDefined();
-    });
 
-    test('should find all posts ', async () => {
+
+    test('should find all posts without any filters', async () => {
         const postData = {
             author: 1,
             content: "test",
@@ -43,7 +43,7 @@ describe('post repository', () => {
         expect(posts).toBeDefined();
     });
 
-    test('should find all posts custom where filters', async () => {
+    test('should find all posts with custom where fields', async () => {
         const postData = {
             author: 1,
             content: "test",
@@ -63,7 +63,7 @@ describe('post repository', () => {
         expect(posts).toBeDefined();
     });
 
-    test('should return empty array if the filter value is not in database', async () => {
+    test('should return empty array if the filters value is not in database', async () => {
         const postData = {
             author: 1,
             content: "test",
@@ -83,7 +83,7 @@ describe('post repository', () => {
         expect(posts.length).toEqual(0);
     });
 
-    test('should return user grouped by status', async () => {
+    test('should return post grouped by status', async () => {
         const postData = {
             author: 1,
             content: "test",
@@ -99,7 +99,7 @@ describe('post repository', () => {
                 field: "status"
             }
         })
-        console.log(posts)
+
         expect(posts).toBeDefined();
     });
 

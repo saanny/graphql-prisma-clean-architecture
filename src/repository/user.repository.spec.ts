@@ -10,11 +10,11 @@ describe('post repository', () => {
         repository = new UserRepository(new Prisma());
     })
 
-    it('can create an instance of user repository ', async () => {
+    test('can create an instance of user repository ', async () => {
         expect(repository).toBeDefined();
     });
 
-    test('should create new user ', async () => {
+    test('should create new user with normal data', async () => {
         const userData = {
             email: "test@gmail.com",
             name: "Amir Ahmadi",
@@ -26,7 +26,7 @@ describe('post repository', () => {
         expect(user).toBeDefined();
     });
 
-    test('should find all users with out any filters', async () => {
+    test('should find all users without any filters', async () => {
         const userData = {
             email: "test@gmail.com",
             name: "Amir Ahmadi",
@@ -41,7 +41,7 @@ describe('post repository', () => {
         expect(users).toBeDefined();
     });
 
-    test('should find all users custom where filters', async () => {
+    test('should find all users custom with custom where fields', async () => {
         const userData = {
             email: "test@gmail.com",
             name: "Amir Ahmadi",
@@ -60,7 +60,7 @@ describe('post repository', () => {
         expect(users).toBeDefined();
     });
 
-    test('should return empty array if the filter value is not in database', async () => {
+    test('should return empty array if the filters value is not in database', async () => {
         const userData = {
             email: "test@gmail.com",
             name: "Amir Ahmadi",
