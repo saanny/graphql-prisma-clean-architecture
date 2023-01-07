@@ -38,7 +38,7 @@ export class PostRepository {
             filtersData.groupBy = {
                 by: [filters?.groupBy?.field],
                 _count: {
-                    role: true,
+                    status: true,
                 },
             }
 

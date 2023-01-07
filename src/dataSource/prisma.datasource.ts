@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { injectable } from "inversify";
 import { Service } from "typedi";
 
 @Service()

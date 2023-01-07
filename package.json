@@ -60,6 +60,7 @@
     "inversify": "^6.0.1",
     "inversify-express-utils": "^6.4.3",
     "jest-cucumber": "^3.0.1",
+    "jest-mock-extended": "^3.0.1",
     "prisma": "^4.8.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
