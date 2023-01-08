@@ -1,14 +1,17 @@
 import { PostRepository } from './post.repository'
-import { PostStatus } from '@prisma/client';
+import { UserRepository } from './user.repository'
+import { PostStatus, UserRole } from '@prisma/client';
 import { Prisma } from '../dataSource/prisma.datasource';
 
 describe('post repository', () => {
     let repository: PostRepository;
+    let userRepository: UserRepository;
     let prisma: Prisma;
 
     beforeEach(() => {
         prisma = new Prisma();
         repository = new PostRepository(prisma);
+        userRepository = new UserRepository(prisma)
     });
 
     afterAll(() => {
@@ -19,12 +22,18 @@ describe('post repository', () => {
         expect(repository).toBeDefined();
     });
     test('should create new post with normal data', async () => {
+        const userData = {
+            email: "test@gmail.com",
+            name: "Amir Ahmadi",
+            role: UserRole.Author
+        }
+        const user = await userRepository.save(userData)
+
         const postData = {
-            author: 1,
+            authorId: user.id,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
-
         }
         const post = await repository.save(postData)
 
@@ -35,7 +44,7 @@ describe('post repository', () => {
 
     test('should find all posts without any filters', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -51,7 +60,7 @@ describe('post repository', () => {
 
     test('should find all posts with custom where fields', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -71,7 +80,7 @@ describe('post repository', () => {
 
     test('should return empty array if the filters value is not in database', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -91,7 +100,7 @@ describe('post repository', () => {
 
     test('should return post grouped by status', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",

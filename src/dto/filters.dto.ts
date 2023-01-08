@@ -9,12 +9,6 @@ export class UserFiltersDTO {
 
     @Field()
     groupBy?: FilterGroupByUserDTO;
-
-    @Field()
-    page?: number
-
-    @Field()
-    limit?: number
 }
 
 @InputType()
@@ -25,9 +19,4 @@ export class PostFiltersDTO {
     @Field()
     groupBy?: FilterGroupByPostDTO;
 
-    @Field()
-    page?: number
-
-    @Field()
-    limit?: number
 }

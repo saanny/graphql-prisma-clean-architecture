@@ -1,5 +1,6 @@
 import { PostStatus } from "@prisma/client";
 import * as TypeGraphQL from "type-graphql";
+import { User } from "./user.model";
 
 @TypeGraphQL.ObjectType("Post", {
     isAbstract: false
@@ -20,10 +21,15 @@ export class Post {
     })
     content!: string;
 
+    @TypeGraphQL.Field(_type => User, {
+        nullable: true
+    })
+    author?: User;
+
     @TypeGraphQL.Field(_type => Number, {
         nullable: false
     })
-    author!: number;
+    authorId!: number;
 
     @TypeGraphQL.Field(_type => String, {
         nullable: false

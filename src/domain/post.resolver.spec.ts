@@ -24,7 +24,7 @@ describe('post resolver', () => {
 
     test('should create new post with normal data', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -37,7 +37,7 @@ describe('post resolver', () => {
 
     test('should find all posts without any filters', async () => {
         const postData = {
-            author: 1,
+            authorId: 1,
             content: "test",
             status: PostStatus.Archived,
             title: "test",

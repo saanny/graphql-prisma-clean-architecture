@@ -15,15 +15,17 @@ export class UserResolver {
 
     public constructor(private readonly _userRepository: UserRepository) { }
 
-    @Query(() => [User])
-    async getAllUsers(@Arg("filters") filters: UserFiltersDTO): Promise<Array<User>> {
-
-        return this._userRepository.getAll(filters);
-    }
-
     @Mutation(() => User!)
     async createUser(@Arg("input") input: CreateUserDTO): Promise<User> {
 
         return this._userRepository.save(input);
     }
+
+    @Query(() => [User])
+    async getAllUsers(@Arg("filters") filters: UserFiltersDTO): Promise<Array<any>> {
+
+        return this._userRepository.getAll(filters);
+    }
+
+
 }

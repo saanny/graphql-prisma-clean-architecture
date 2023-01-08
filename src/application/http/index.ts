@@ -2,6 +2,7 @@ import express from "express";
 import cors from 'cors';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServer } from "@apollo/server";
+import { json } from 'body-parser';
 
 export class Server {
     private _app = express();
@@ -13,7 +14,7 @@ export class Server {
     public async run(port: number) {
         this._app.use(express.json());
 
-        this._app.use('/graphql', cors<cors.CorsRequest>(), expressMiddleware(this._apolloServer));
+        this._app.use('/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(this._apolloServer));
 
         this._app.listen(port, () =>
             console.log(`server is running on http://localhost:${port}`)

@@ -11,7 +11,7 @@ export class CreatePostDTO {
     content!: string;
 
     @Field(() => Number!)
-    author!: number;
+    authorId!: number;
 
     @Field(() => String!)
     status!: PostStatus;
@@ -27,7 +27,7 @@ export class PostFilterFieldsDTO {
     content?: string;
 
     @Field(() => Number, { nullable: true })
-    author?: number;
+    authorId?: number;
 
     @Field(() => String, { nullable: true })
     status?: PostStatus;

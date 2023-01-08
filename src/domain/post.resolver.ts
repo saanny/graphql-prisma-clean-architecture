@@ -19,7 +19,7 @@ export class PostResolver {
     }
 
     @Query(() => [Post])
-    async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Post[]> {
+    async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Array<Post>> {
 
         const posts = await this.postRepository.getAll(filters);
         return posts;

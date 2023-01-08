@@ -10,13 +10,13 @@ export class UserRepository {
     public constructor(private readonly dataSource: Prisma) { }
 
     async save(user: CreateUserDTO): Promise<User> {
-
-        return this.dataSource
+        const newUser = await this.dataSource
             .prisma.user.create({
                 data: {
                     ...user
                 }
-            })
+            });
+        return newUser
     }
 
     async getAll(filters: UserFiltersDTO): Promise<Array<any>> {
@@ -39,18 +39,22 @@ export class UserRepository {
             filtersData.groupBy = {
                 by: [filters?.groupBy?.field],
                 _count: {
-                    role: true,
+                    [filters?.groupBy?.field]: true,
                 },
             }
 
             users = await this.dataSource.prisma.user.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
+
             });
 
         } else {
             users = await this.dataSource.prisma.user.findMany({
-                where: { ...filtersData.where }
+                where: { ...filtersData.where },
+                include: {
+                    posts: true
+                }
             });
         }
 

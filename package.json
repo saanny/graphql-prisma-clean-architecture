@@ -18,7 +18,8 @@
     "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "test": "dotenv -e .env.test jest",
     "test:dev": "dotenv -e .env.test jest --watchAll",
-    "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init"
+    "migrate:postgres-test": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
+    "migrate:postgres-dev": "dotenv -e .env.development -- npx prisma migrate dev --name postgres-init"
   },
   "husky": {
     "hooks": {

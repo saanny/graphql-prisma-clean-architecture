@@ -13,19 +13,21 @@ export class PostRepository {
 
         return this.dataSource.prisma.post.create({
             data: {
-                ...post
+                ...post,
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         })
     }
 
-    async getAll(filters: PostFiltersDTO): Promise<Array<any>> {
+    async getAll(filters: PostFiltersDTO): Promise<Array<Post>> {
 
         let posts: Array<Post> = [];
 
         const filtersData: any = {}
 
-        if (filters?.where?.author) {
-            filtersData.where = { ...filtersData?.where, author: filters.where?.author }
+        if (filters?.where?.authorId) {
+            filtersData.where = { ...filtersData?.where, authorId: filters.where?.authorId }
         }
         if (filters?.where?.content) {
             filtersData.where = { ...filtersData?.where, content: filters?.where?.content }
@@ -38,18 +40,22 @@ export class PostRepository {
             filtersData.groupBy = {
                 by: [filters?.groupBy?.field],
                 _count: {
-                    status: true,
+                    [filters?.groupBy?.field]: true,
                 },
             }
 
             posts = await this.dataSource.prisma.post.groupBy({
                 ...filtersData.groupBy,
                 where: { ...filtersData.where }
+
             });
 
         } else {
             posts = await this.dataSource.prisma.post.findMany({
-                where: { ...filtersData.where }
+                where: { ...filtersData.where },
+                include: {
+                    author: true
+                }
             });
         }
 

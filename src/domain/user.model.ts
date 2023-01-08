@@ -1,5 +1,6 @@
 import { UserRole } from "../common/enums/UserEnums";
 import * as TypeGraphQL from "type-graphql";
+import { Post } from "./post.model";
 
 @TypeGraphQL.ObjectType("User", {
     isAbstract: true
@@ -24,4 +25,8 @@ export class User {
         nullable: false
     })
     role!: UserRole;
+    @TypeGraphQL.Field(_type => [Post], {
+        nullable: true
+    })
+    posts?: [Post];
 }
