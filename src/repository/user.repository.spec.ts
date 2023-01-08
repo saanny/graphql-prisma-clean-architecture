@@ -5,10 +5,17 @@ import { Prisma } from '../dataSource/prisma.datasource';
 describe('post repository', () => {
     let repository: UserRepository;
 
+    let prisma: Prisma;
 
     beforeEach(() => {
-        repository = new UserRepository(new Prisma());
-    })
+        prisma = new Prisma();
+        repository = new UserRepository(prisma);
+    });
+
+    afterAll(() => {
+        prisma.prisma.$disconnect();
+    });
+
 
     test('can create an instance of user repository ', async () => {
         expect(repository).toBeDefined();
