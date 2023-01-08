@@ -17,6 +17,10 @@ The server application is designed based on clean architecture. It comprises of 
 
 Process endpoint uses domain service endpoints as business actions to implement the workflow and perform a task. Process endpoint only knows about entity models.
 
+### Running App
+* Create .env.development and .env.test files (You can see variables in .env.example).
+* Run migrate:postgres script.
+* Run start:dev for watching app or start script.
 ### Running Tests
 * Create .env.development and .env.test files (You can see variables in .env.example).
 * Run migrate:postgres script.
