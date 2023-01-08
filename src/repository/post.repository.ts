@@ -1,8 +1,10 @@
-import { Post } from "@prisma/client";
+import { Post, PostStatus } from "@prisma/client";
 import { Service } from "typedi";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { CreatePostDTO } from "../dto/post.dto";
 import { Prisma } from "../dataSource/prisma.datasource";
+import { GroupByPost } from "../domain/post.model";
+import { ofType } from "../common/types";
 
 
 @Service()
@@ -20,9 +22,9 @@ export class PostRepository {
         })
     }
 
-    async getAll(filters: PostFiltersDTO): Promise<Array<Post>> {
+    async getAll(filters: PostFiltersDTO): Promise<Array<Post | GroupByPost>> {
 
-        let posts: Array<Post> = [];
+        let posts: Array<Post | GroupByPost> = [];
 
         const filtersData: any = {}
 
@@ -45,11 +47,15 @@ export class PostRepository {
             }
 
             posts = await this.dataSource.prisma.post.groupBy({
-                ...filtersData.groupBy,
-                where: { ...filtersData.where }
-
+                ...filtersData.groupBy
             });
 
+            posts = posts.map((item: any) => {
+                return ofType<GroupByPost>({
+                    count: item._count.status,
+                    status: item.status
+                })
+            })
         } else {
             posts = await this.dataSource.prisma.post.findMany({
                 where: { ...filtersData.where },

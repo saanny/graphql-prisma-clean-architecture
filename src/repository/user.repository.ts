@@ -4,6 +4,8 @@ import { CreateUserDTO } from "../dto/user.dto";
 import { Prisma } from "../dataSource/prisma.datasource";
 import { Service } from "typedi";
 import { User } from "@prisma/client";
+import { GroupByUser } from "../domain/user.model";
+import { ofType } from "../common/types";
 @Service()
 export class UserRepository {
 
@@ -19,11 +21,11 @@ export class UserRepository {
         return newUser
     }
 
-    async getAll(filters: UserFiltersDTO): Promise<Array<any>> {
+    async getAll(filters: UserFiltersDTO): Promise<Array<User | GroupByUser>> {
 
-        let users: Array<User> = [];
+        let users: Array<User | GroupByUser> = [];
 
-        const filtersData: any = {}
+        const filtersData: any = {};
 
         if (filters?.where?.email) {
             filtersData.where = { ...filtersData?.where, email: filters.where?.email }
@@ -44,10 +46,15 @@ export class UserRepository {
             }
 
             users = await this.dataSource.prisma.user.groupBy({
-                ...filtersData.groupBy,
-                where: { ...filtersData.where }
-
+                ...filtersData.groupBy
             });
+
+            users = users.map((item: any) => {
+                return ofType<GroupByUser>({
+                    count: item._count.role,
+                    role: item.role
+                })
+            })
 
         } else {
             users = await this.dataSource.prisma.user.findMany({

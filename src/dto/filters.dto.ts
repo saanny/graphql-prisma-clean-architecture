@@ -20,3 +20,11 @@ export class PostFiltersDTO {
     groupBy?: FilterGroupByPostDTO;
 
 }
+
+@InputType()
+export class PostGroupByDTO {
+
+    @Field()
+    groupBy?: FilterGroupByPostDTO;
+
+}

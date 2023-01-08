@@ -4,7 +4,7 @@ import {
     Query,
     Resolver,
 } from "type-graphql";
-import { Post } from "./post.model";
+import { GroupByPost, Post } from "./post.model";
 import { CreatePostDTO } from "../dto/post.dto";
 import { PostFiltersDTO } from "../dto/filters.dto";
 import { Service } from "typedi";
@@ -19,7 +19,7 @@ export class PostResolver {
     }
 
     @Query(() => [Post])
-    async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Array<Post>> {
+    async getAllPosts(@Arg("filters") filters: PostFiltersDTO): Promise<Array<Post | GroupByPost>> {
 
         const posts = await this.postRepository.getAll(filters);
         return posts;

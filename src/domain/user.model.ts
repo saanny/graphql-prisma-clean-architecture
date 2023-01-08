@@ -1,6 +1,7 @@
 import { UserRole } from "../common/enums/UserEnums";
 import * as TypeGraphQL from "type-graphql";
 import { Post } from "./post.model";
+import { ObjectType } from "type-graphql";
 
 @TypeGraphQL.ObjectType("User", {
     isAbstract: true
@@ -29,4 +30,22 @@ export class User {
         nullable: true
     })
     posts?: [Post];
+
+    @TypeGraphQL.Field(_type => Number, {
+        nullable: true
+    })
+    count?: number;
+}
+
+@ObjectType()
+export class GroupByUser {
+    @TypeGraphQL.Field(_type => Number, {
+        nullable: true
+    })
+    count?: number;
+
+    @TypeGraphQL.Field(_type => String, {
+        nullable: false
+    })
+    role!: UserRole;
 }

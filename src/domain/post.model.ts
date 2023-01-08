@@ -1,5 +1,6 @@
 import { PostStatus } from "@prisma/client";
 import * as TypeGraphQL from "type-graphql";
+import { ObjectType } from "type-graphql";
 import { User } from "./user.model";
 
 @TypeGraphQL.ObjectType("Post", {
@@ -46,4 +47,22 @@ export class Post {
     })
     updatedAt!: Date;
 
+    @TypeGraphQL.Field(_type => Number, {
+        nullable: true
+    })
+    count?: number;
+
+}
+
+@ObjectType()
+export class GroupByPost {
+    @TypeGraphQL.Field(_type => Number, {
+        nullable: true
+    })
+    count?: number;
+
+    @TypeGraphQL.Field(_type => String, {
+        nullable: false
+    })
+    status!: PostStatus;
 }
