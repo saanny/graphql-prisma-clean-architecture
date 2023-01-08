@@ -5,8 +5,8 @@
   "main": "bootstrap.js",
   "scripts": {
     "build": "rimraf ./build && tsc",
-    "start:dev": "npx nodemon",
-    "start": "npm run build && node build/bootstrap.ts",
+    "start:dev": "dotenv -e .env.development npx nodemon",
+    "start": "dotenv -e .env.development npm run build && node build/bootstrap.ts",
     "lint": "eslint . --ext .ts",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
@@ -16,8 +16,9 @@
     "prettier-watch:win32": "onchange \"src/**/*.ts\" -- prettier --write {{changed}}",
     "prettier-watch:darwin:linux": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
-    "test": "jest",
-    "test:dev": "jest --watchAll"
+    "test": "dotenv -e .env.test jest",
+    "test:dev": "dotenv -e .env.test jest --watchAll",
+    "migrate:postgres": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init"
   },
   "husky": {
     "hooks": {
@@ -54,6 +55,7 @@
     "@types/cors": "^2.8.13",
     "@types/inversify": "^2.0.33",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "graphql": "15",
     "graphql-scalars": "^1.20.1",
