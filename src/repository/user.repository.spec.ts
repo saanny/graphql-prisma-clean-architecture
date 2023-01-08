@@ -5,15 +5,15 @@ import { Prisma } from '../dataSource/prisma.datasource';
 describe('post repository', () => {
     let repository: UserRepository;
 
-    let prisma: Prisma;
+    let dataSource: Prisma;
 
-    beforeEach(() => {
-        prisma = new Prisma();
-        repository = new UserRepository(prisma);
+    beforeEach(async () => {
+        dataSource = new Prisma();
+        repository = new UserRepository(dataSource);
     });
 
-    afterAll(() => {
-        prisma.prisma.$disconnect();
+    afterAll(async () => {
+        await dataSource.prisma.$disconnect();
     });
 
 

@@ -6,16 +6,18 @@ import { Prisma } from '../dataSource/prisma.datasource';
 describe('post repository', () => {
     let repository: PostRepository;
     let userRepository: UserRepository;
-    let prisma: Prisma;
+    let dataSource: Prisma;
 
-    beforeEach(() => {
-        prisma = new Prisma();
-        repository = new PostRepository(prisma);
-        userRepository = new UserRepository(prisma)
+    beforeEach(async () => {
+        dataSource = new Prisma();
+        repository = new PostRepository(dataSource);
+        userRepository = new UserRepository(dataSource)
+
+
     });
 
-    afterAll(() => {
-        prisma.prisma.$disconnect();
+    afterAll(async () => {
+        await dataSource.prisma.$disconnect();
     });
 
     test('can create an instance of post repository ', async () => {
@@ -43,8 +45,15 @@ describe('post repository', () => {
 
 
     test('should find all posts without any filters', async () => {
+        const userData = {
+            email: "test@gmail.com",
+            name: "Amir Ahmadi",
+            role: UserRole.Author
+        }
+        const user = await userRepository.save(userData)
+
         const postData = {
-            authorId: 1,
+            authorId: user.id,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -59,8 +68,15 @@ describe('post repository', () => {
     });
 
     test('should find all posts with custom where fields', async () => {
+        const userData = {
+            email: "test@gmail.com",
+            name: "Amir Ahmadi",
+            role: UserRole.Author
+        }
+        const user = await userRepository.save(userData)
+
         const postData = {
-            authorId: 1,
+            authorId: user.id,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -79,8 +95,15 @@ describe('post repository', () => {
     });
 
     test('should return empty array if the filters value is not in database', async () => {
+        const userData = {
+            email: "test@gmail.com",
+            name: "Amir Ahmadi",
+            role: UserRole.Author
+        }
+        const user = await userRepository.save(userData)
+
         const postData = {
-            authorId: 1,
+            authorId: user.id,
             content: "test",
             status: PostStatus.Archived,
             title: "test",
@@ -99,8 +122,15 @@ describe('post repository', () => {
     });
 
     test('should return post grouped by status', async () => {
+        const userData = {
+            email: "test@gmail.com",
+            name: "Amir Ahmadi",
+            role: UserRole.Author
+        }
+        const user = await userRepository.save(userData)
+
         const postData = {
-            authorId: 1,
+            authorId: user.id,
             content: "test",
             status: PostStatus.Archived,
             title: "test",

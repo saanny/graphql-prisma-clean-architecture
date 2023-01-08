@@ -7,16 +7,17 @@ import { UserRole } from "@prisma/client";
 describe('user resolver', () => {
     let resolver: UserResolver;
     let repository: UserRepository;
-    let prisma: Prisma;
+    let dataSource: Prisma;
 
-    beforeEach(() => {
-        prisma = new Prisma();
-        repository = new UserRepository(prisma)
+    beforeEach(async () => {
+        dataSource = new Prisma();
+        repository = new UserRepository(dataSource)
         resolver = new UserResolver(repository);
+
     });
 
-    afterAll(() => {
-        prisma.prisma.$disconnect();
+    afterAll(async () => {
+        await dataSource.prisma.$disconnect();
     });
     test('can create an instance of post repository ', async () => {
         expect(resolver).toBeDefined();
